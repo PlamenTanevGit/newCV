@@ -1217,7 +1217,6 @@ p { line-height: 1.65; color: var(--text-muted); }
   background: radial-gradient(ellipse at 50% 0, rgba(33, 99, 69, 0.25), transparent 62%), rgba(7, 16, 23, 0.72);
 }
 .jc *, .jc *::before, .jc *::after { box-sizing: border-box; }
-.jc-circuit { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; z-index: -1; color: rgba(71, 187, 129, 0.19); pointer-events: none; }
 .jc-actions { display: flex; margin: 0 0 16px; }
 .jc-actions[hidden] { display: none; }
 .jc-actions button {
