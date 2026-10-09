@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample QA Risk Analysis | Plamen Tanev</title>
+  <meta name="description" content="Illustrative sample. A fictional release of a generic web application, used to show how I turn a change list into a risk-based test focus. Ratings are examples, not measurements from a real ">
+  <meta name="theme-color" content="#050911">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050911'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%23c8ff00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="Plamen Tanev, portfolio home">
+        <span class="brand-name">Plamen Tanev</span>
+        <span class="brand-role">Senior QA Engineer · Remote · EU / EMEA</span>
+      </a>
+      <a class="neon-button button-secondary doc-back" href="../index.html#samples">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="container doc">
+    <article class="doc-body">
+      <h1>Sample QA Risk Analysis</h1>
+      <blockquote>
+      <p><strong>Illustrative sample.</strong> A fictional release of a generic web application, used to show how I turn a change list into a risk-based test focus. Ratings are examples, not measurements from a real system.</p>
+      </blockquote>
+      <p><strong>Release:</strong> TODO (name / version)
+      <strong>Change summary (example):</strong> new bulk-import feature, updated role permissions, upgraded date-picker component.</p>
+      <h2>How I rate</h2>
+      <ul>
+      <li><strong>Likelihood:</strong> how probable is a defect (new code, complexity, history of defects, integration points).</li>
+      <li><strong>Impact:</strong> user impact and business impact if it fails in production.</li>
+      <li><strong>Testing priority:</strong> High / Medium / Low, from likelihood and impact together.</li>
+      </ul>
+      <h2>Risk table</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Feature area</th>
+      <th>Risk</th>
+      <th>User impact</th>
+      <th>Business impact</th>
+      <th>Testing priority</th>
+      <th>Recommended coverage</th>
+      <th>Open questions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Bulk import (new)</td>
+      <td>Wrong or partial data imported; silent row failures</td>
+      <td>Users see wrong or missing records</td>
+      <td>Data integrity issues, support load</td>
+      <td><strong>High</strong></td>
+      <td>Boundary file sizes, malformed rows, duplicates, rollback behaviour, row-level error report, DB verification. Manual exploratory first, then automate the happy path</td>
+      <td>What is the max rows/file size? Is import all-or-nothing?</td>
+      </tr>
+      <tr>
+      <td>Role permissions (changed)</td>
+      <td>A role gains or loses access by mistake</td>
+      <td>Users see data or actions they should not, or are blocked</td>
+      <td>Security and compliance exposure</td>
+      <td><strong>High</strong></td>
+      <td>Role × action matrix on UI and API, direct URL access, token with wrong role</td>
+      <td>Are there roles not covered by the matrix?</td>
+      </tr>
+      <tr>
+      <td>Date-picker upgrade</td>
+      <td>Wrong date selected, formatting or time-zone shift</td>
+      <td>Wrong dates saved</td>
+      <td>Incorrect scheduling and reporting</td>
+      <td><strong>Medium</strong></td>
+      <td>Locale and time-zone checks, month boundaries, keyboard input, all browsers in scope</td>
+      <td>Which locales are officially supported?</td>
+      </tr>
+      <tr>
+      <td>Core create/edit flow (unchanged)</td>
+      <td>Indirect regression via shared components</td>
+      <td>Users cannot save records</td>
+      <td>High, but low likelihood</td>
+      <td><strong>Medium</strong></td>
+      <td>Automated regression plus a short manual smoke</td>
+      <td>None</td>
+      </tr>
+      <tr>
+      <td>Notifications / email</td>
+      <td>Duplicate or missing messages</td>
+      <td>Users miss updates</td>
+      <td>Reduced trust, delays</td>
+      <td><strong>Medium</strong></td>
+      <td>Trigger each event once, check recipients and content</td>
+      <td>Is the mail service stubbed in test?</td>
+      </tr>
+      <tr>
+      <td>Reports / exports</td>
+      <td>Totals differ from source data</td>
+      <td>Wrong numbers in decisions</td>
+      <td>Reputation and decision risk</td>
+      <td><strong>Medium</strong></td>
+      <td>Compare export against UI and DB for a known data set</td>
+      <td>Which reports changed?</td>
+      </tr>
+      <tr>
+      <td>Admin settings (unchanged)</td>
+      <td>Low</td>
+      <td>Low</td>
+      <td>Low</td>
+      <td><strong>Low</strong></td>
+      <td>Smoke only</td>
+      <td>None</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>Test approach summary</h2>
+      <ol>
+      <li><strong>Day 0:</strong> review stories and acceptance criteria with the product owner and developers. Raise the open questions above.</li>
+      <li><strong>Early:</strong> test new and high-risk areas first, with exploratory sessions and API-level checks.</li>
+      <li><strong>Mid:</strong> run the automated regression and the manual smoke for unchanged critical flows.</li>
+      <li><strong>Late:</strong> retest fixes, confirm data checks, run the cross-browser pass, report status.</li>
+      <li><strong>Sign-off:</strong> report residual risk plainly (what was not tested and why) so the release decision is informed.</li>
+      </ol>
+      <h2>Residual risk statement (template)</h2>
+      <blockquote>
+      <p>Tested: TODO. Not tested / limited: TODO. Known open defects: TODO. Recommendation: Go / Go with known issues / No-go.</p>
+      </blockquote>
+    </article>
+    <p class="doc-foot"><a class="neon-button button-secondary" href="../index.html#samples">&larr; Back to portfolio</a>
+      <a class="neon-button button-secondary" href="../PlamenTanevAiQA_Cv.pdf" download="PlamenTanevAiQA_Cv.pdf">Download CV</a></p>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2026 Plamen Tanev · Static page, no trackers.</div>
+  </footer>
+</body>
+</html>

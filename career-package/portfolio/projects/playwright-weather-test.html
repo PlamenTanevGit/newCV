@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Playwright Test Suite: Weather Site and Demo Form | Plamen Tanev</title>
+  <meta name="description" content="Evidence level: real public repository. Findings below come from reading the repository on 2026-10-01.">
+  <meta name="theme-color" content="#050911">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050911'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%23c8ff00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="Plamen Tanev, portfolio home">
+        <span class="brand-name">Plamen Tanev</span>
+        <span class="brand-role">Senior QA Engineer · Remote · EU / EMEA</span>
+      </a>
+      <a class="neon-button button-secondary doc-back" href="../index.html#projects">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="container doc">
+    <article class="doc-body">
+      <h1>Playwright Test Suite: Weather Site and Demo Form</h1>
+      <p><strong>Evidence level: real public repository.</strong> Findings below come from reading the repository on 2026-10-01.</p>
+      <h2>Project Overview</h2>
+      <p>A JavaScript Playwright suite that tests navigation and page content on a public Bulgarian weather site (sinoptik.bg) and the validation of a public demo-request form (payhawk.com). The repo name suggests the tests were generated with AI assistance and then adjusted by hand; the repo has no README, so that is an inference from the name only.</p>
+      <h2>Problem / Context</h2>
+      <p>Practice project to build a modern Playwright setup end to end: tests, reporters, failure artefacts and a GitHub Actions run. Weather pages combine dynamic content (forecast tables, location lists), a consent pop-up and mobile layouts, which makes them a useful, realistic target for UI test design.</p>
+      <h2>Tools Used</h2>
+      <ul>
+      <li>Playwright Test (<code>@playwright/test</code> ^1.40), JavaScript, Node 18+ (Node 20 in CI)</li>
+      <li>Reporters: list, HTML and JUnit XML</li>
+      <li>Traces, screenshots and video retained on failure</li>
+      <li>ESLint and Prettier</li>
+      <li>GitHub Actions</li>
+      </ul>
+      <h2>QA Approach</h2>
+      <ul>
+      <li>Specs are grouped by area (<code>bulgaria_locations</code>, <code>europe_locations</code>, <code>sinoptik_test</code>, <code>payhawk_test_spec</code>) with <code>test.describe</code> and <code>test.step</code> for readable reports.</li>
+      <li>A shared helper handles the cookie-consent pop-up (<code>tests/utils/consent-handler.js</code>).</li>
+      <li><code>beforeEach</code>/<code>afterEach</code> hooks manage navigation and capture a screenshot on failure.</li>
+      <li>Mobile checks use an explicit viewport (375 × 667).</li>
+      <li>CI retries failed tests twice and uses two workers; failure artefacts are uploaded from the workflow.</li>
+      </ul>
+      <h2>What Was Tested</h2>
+      <ul>
+      <li>Location links in regional sections (for example Western Europe) and navigation to a country page.</li>
+      <li>14-day and 5-day forecast navigation tabs and the structure of the forecast data.</li>
+      <li>Presence and behaviour of key links on a mobile viewport.</li>
+      <li>Demo-request form validation: empty form, valid input, email format.</li>
+      </ul>
+      <h2>Example Scenarios</h2>
+      <ol>
+      <li>A user opens the 14-day forecast and the forecast table structure is correct (days, temperatures).</li>
+      <li>A user on a 375 × 667 phone viewport still sees the Bulgaria link and can follow it.</li>
+      <li>A user clicks the Italy link in the Europe section and lands on the Italy forecast page.</li>
+      <li>A visitor submits the demo form with an invalid email and sees a validation message.</li>
+      </ol>
+      <h2>Example Test Cases</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Steps (summary)</th>
+      <th>Expected</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>PW-01</td>
+      <td>Italy link navigates to the Italy page</td>
+      <td>Open Europe locations → click "Italy"</td>
+      <td>URL and page heading show Italy</td>
+      </tr>
+      <tr>
+      <td>PW-02</td>
+      <td>Bulgaria link visible on mobile</td>
+      <td>Set viewport 375×667 → open home</td>
+      <td>Bulgaria link is visible and clickable</td>
+      </tr>
+      <tr>
+      <td>PW-03</td>
+      <td>14-day forecast structure</td>
+      <td>Open the 14-day tab</td>
+      <td>Expected number of day entries, each with date and temperature</td>
+      </tr>
+      <tr>
+      <td>PW-04</td>
+      <td>Empty demo form validation</td>
+      <td>Open the demo form → submit empty</td>
+      <td>Required-field messages appear</td>
+      </tr>
+      <tr>
+      <td>PW-05</td>
+      <td>Invalid email format</td>
+      <td>Enter an invalid email → submit</td>
+      <td>Email validation message appears</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <p><em>The titles reflect the kinds of checks in the specs (for example "should display France link in Western Europe section", "should navigate to Italy page when Italy link is clicked", 14-day and 5-day structure tests, form validation tests). IDs here are portfolio labels, not IDs from the repo.</em></p>
+      <h2>Business Value</h2>
+      <p>This is a practice project, not production work, so no business results are claimed. It shows how I structure UI tests for dynamic public pages, how I collect evidence on failure (trace, video, screenshot), and how I connect tests to CI.</p>
+      <h2>What I Would Improve Next</h2>
+      <p>Honest list based on what I found in the repo:</p>
+      <ul>
+      <li>Add a README (purpose, how to run, how CI works).</li>
+      <li>Remove committed <code>node_modules/</code>, report folders, <code>results.xml</code> and failure screenshots; add them to <code>.gitignore</code>.</li>
+      <li>Tighten weak assertions (for example a count check that accepts 0) and re-enable commented-out assertions.</li>
+      <li>Run <strong>all</strong> specs in CI (the workflow currently runs two of them) and enable Firefox and WebKit projects.</li>
+      <li>Introduce page objects or fixtures and prefer role/test-id locators over XPath where possible.</li>
+      <li>Confirm the demo-form tests never submit a real request to a third-party company. Keep checks read-only and respect each site's terms.</li>
+      <li>Pin a Playwright version policy and add a scheduled nightly CI run.</li>
+      </ul>
+      <h2>Repository / Demo Link</h2>
+      <ul>
+      <li>Repository: <a href="https://github.com/PlamenTanevGit/Claude_Sinoptik_Autogenerated" target="_blank" rel="noopener noreferrer">https://github.com/PlamenTanevGit/Claude_Sinoptik_Autogenerated</a></li>
+      <li>Demo: none (tests run against third-party live sites)</li>
+      </ul>
+      <h2>Screenshots</h2>
+      <p>TODO: Add a screenshot of the Playwright HTML report from a clean local run. See <code>assets/placeholders/project-screenshot-placeholders.md</code>.</p>
+      <h2>TODOs</h2>
+      <ul>
+      <li class="task"><input type="checkbox" disabled> Confirm which parts of the tests were AI-generated and say so in a README.</li>
+      <li class="task"><input type="checkbox" disabled> Clean the repo as listed above.</li>
+      <li class="task"><input type="checkbox" disabled> Add the report screenshot.</li>
+      <li class="task"><input type="checkbox" disabled> Decide whether to keep third-party sites as targets, or move to a site that explicitly allows test traffic.</li>
+      </ul>
+    </article>
+    <p class="doc-foot"><a class="neon-button button-secondary" href="../index.html#projects">&larr; Back to portfolio</a>
+      <a class="neon-button button-secondary" href="../PlamenTanevAiQA_Cv.pdf" download="PlamenTanevAiQA_Cv.pdf">Download CV</a></p>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2026 Plamen Tanev · Static page, no trackers.</div>
+  </footer>
+</body>
+</html>

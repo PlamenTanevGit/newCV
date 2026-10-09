@@ -215,7 +215,7 @@
               <li>No confidential data in public tools</li>
               <li>Priorities and sign-off stay human</li>
             </ul>
-            <p class="card-links"><a href="projects/ai-assisted-qa-workflows.md">Read the workflow</a></p>
+            <p class="card-links"><a href="projects/ai-assisted-qa-workflows.html">Read the workflow</a></p>
           </div>
         </div>
 
@@ -460,31 +460,68 @@
             </div>
           </div>
 
-          <div class="jarvis-features">
-            <article class="jarvis-feature">
-              <span class="icon-badge"><svg class="icon"><use href="#i-plug"/></svg></span>
-              <div><h3>Plugins</h3><p>Extend with custom tools</p></div>
+          <!-- Capabilities: glowing cards from Documents/Codex/2026-10-06/writ/outputs/jarvis-glowing-capabilities.html.
+               Static markup; jarvis-cap.js adds the pointer glow and tilt. -->
+          <div class="jc" role="group" aria-label="JARVIS capabilities">
+            <svg class="jc-circuit" viewBox="0 0 1100 1600" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M15 0V80l40 40v250l-65 65v370l45 45V1600"/>
+            <path d="M62 0V125l40 40v320l-65 65v470l45 45V1600"/>
+            <path d="M109 0V170l40 40v390l-65 65v570l45 45V1600"/>
+            <path d="M156 0V215l40 40v250l-65 65v670l45 45V1600"/>
+            <path d="M203 0V260l40 40v320l-65 65v370l45 45V1600"/>
+            <path d="M250 0V80l40 40v390l-65 65v470l45 45V1600"/>
+            <path d="M297 0V125l40 40v250l-65 65v570l45 45V1600"/>
+            <path d="M344 0V170l40 40v320l-65 65v670l45 45V1600"/>
+            <path d="M391 0V215l40 40v390l-65 65v370l45 45V1600"/>
+            <path d="M438 0V260l40 40v250l-65 65v470l45 45V1600"/>
+            <path d="M485 0V80l40 40v320l-65 65v570l45 45V1600"/>
+            <path d="M532 0V125l40 40v390l-65 65v670l45 45V1600"/>
+            <path d="M579 0V170l40 40v250l-65 65v370l45 45V1600"/>
+            <path d="M626 0V215l40 40v320l-65 65v470l45 45V1600"/>
+            <path d="M673 0V260l40 40v390l-65 65v570l45 45V1600"/>
+            <path d="M720 0V80l40 40v250l-65 65v670l45 45V1600"/>
+            <path d="M767 0V125l40 40v320l-65 65v370l45 45V1600"/>
+            <path d="M814 0V170l40 40v390l-65 65v470l45 45V1600"/>
+            <path d="M861 0V215l40 40v250l-65 65v570l45 45V1600"/>
+            <path d="M908 0V260l40 40v320l-65 65v670l45 45V1600"/>
+            <path d="M955 0V80l40 40v390l-65 65v370l45 45V1600"/>
+            <path d="M1002 0V125l40 40v250l-65 65v470l45 45V1600"/>
+            <path d="M1049 0V170l40 40v320l-65 65v570l45 45V1600"/>
+            <path d="M1096 0V215l40 40v390l-65 65v670l45 45V1600"/>
+            </svg>
+            <div class="jc-actions" hidden><button type="button" id="jc-motion" aria-pressed="false">Pause tilt</button></div>
+            <div class="jc-grid">
+            <article class="jc-card">
+              <div class="jc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 8v5m8-5v5M6 13h12v3a6 6 0 0 1-12 0zm6 9v-3"/></svg></div>
+              <h3>Plugins</h3>
+              <p>Extend with custom tools</p>
             </article>
-            <article class="jarvis-feature">
-              <span class="icon-badge"><svg class="icon"><use href="#i-target"/></svg></span>
-              <div><h3>Mission Mode</h3><p>Multi-step task execution</p></div>
+            <article class="jc-card">
+              <div class="jc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h7l2 3h9v10H3z"/><path d="M3 7V5h7l2 2h8v3"/></svg></div>
+              <h3>Local Tools</h3>
+              <p>File system, utilities and more</p>
             </article>
-            <article class="jarvis-feature">
-              <span class="icon-badge alt-green"><svg class="icon"><use href="#i-mic"/></svg></span>
-              <div><h3>Voice</h3><p>Natural conversations</p></div>
+            <article class="jc-card">
+              <div class="jc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/><path d="M12 1v5m0 12v5M1 12h5m12 0h5"/></svg></div>
+              <h3>Mission Mode</h3>
+              <p>Multi-step task execution</p>
             </article>
-            <article class="jarvis-feature">
-              <span class="icon-badge alt-green"><svg class="icon"><use href="#i-chip"/></svg></span>
-              <div><h3>Memory</h3><p>Remembers context</p></div>
+            <article class="jc-card">
+              <div class="jc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4M19 9h4m-4 6h4"/><rect x="9" y="9" width="6" height="6"/></svg></div>
+              <h3>Memory</h3>
+              <p>Remembers context</p>
             </article>
-            <article class="jarvis-feature">
-              <span class="icon-badge alt-warm"><svg class="icon"><use href="#i-screen"/></svg></span>
-              <div><h3>Screen Copilot</h3><p>Analyse what you see</p></div>
+            <article class="jc-card">
+              <div class="jc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/></svg></div>
+              <h3>Voice</h3>
+              <p>Natural conversations</p>
             </article>
-            <article class="jarvis-feature">
-              <span class="icon-badge alt-warm"><svg class="icon"><use href="#i-folder"/></svg></span>
-              <div><h3>Local Tools</h3><p>File system, utilities and more</p></div>
+            <article class="jc-card">
+              <div class="jc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="16" height="16" rx="2"/><path d="m18 10 4-3v10l-4-3"/></svg></div>
+              <h3>Screen Copilot</h3>
+              <p>Analyse what you see</p>
             </article>
+            </div>
           </div>
         </div>
       </div>
@@ -645,8 +682,8 @@
                 <li>Release support and sign-off</li>
               </ul>
               <div class="expertise-card-links">
-                <a href="samples/sample-test-case.md">Sample test case</a>
-                <a href="samples/sample-bug-report.md">Sample bug report</a>
+                <a href="samples/sample-test-case.html">Sample test case</a>
+                <a href="samples/sample-bug-report.html">Sample bug report</a>
               </div>
             </article>
           </div>
@@ -684,7 +721,7 @@
               </ul>
               <div class="expertise-card-links">
                 <a href="#projects">Automation examples</a>
-                <a href="projects/playwright-weather-test.md">CI workflow</a>
+                <a href="projects/playwright-weather-test.html">CI workflow</a>
               </div>
             </article>
           </div>
@@ -730,8 +767,8 @@
                 <li>Permission and boundary checks</li>
               </ul>
               <div class="expertise-card-links">
-                <a href="samples/sample-api-test-plan.md">Sample API test plan</a>
-                <a href="projects/api-testing.md">API testing case study</a>
+                <a href="samples/sample-api-test-plan.html">Sample API test plan</a>
+                <a href="projects/api-testing.html">API testing case study</a>
               </div>
             </article>
           </div>
@@ -771,8 +808,8 @@
                 <li>Claude, Copilot and AI tool workflows</li>
               </ul>
               <div class="expertise-card-links">
-                <a href="projects/ai-assisted-qa-workflows.md">AI test workflow</a>
-                <a href="projects/ai-assisted-qa-workflows.md">Prompt examples</a>
+                <a href="projects/ai-assisted-qa-workflows.html">AI test workflow</a>
+                <a href="projects/ai-assisted-qa-workflows.html">Prompt examples</a>
               </div>
             </article>
           </div>
@@ -812,8 +849,8 @@
                 <li>Audit trail preparation</li>
               </ul>
               <div class="expertise-card-links">
-                <a href="samples/sample-qa-risk-analysis.md">Sample risk analysis</a>
-                <a href="samples/sample-qa-risk-analysis.md">QA decision map</a>
+                <a href="samples/sample-qa-risk-analysis.html">Sample risk analysis</a>
+                <a href="samples/sample-qa-risk-analysis.html">QA decision map</a>
               </div>
             </article>
           </div>
@@ -831,12 +868,12 @@
           <p>Enable JavaScript to see the project gallery. The case studies and repositories are also here:</p>
           <ul>
             <li><a href="#jarvis">JARVIS — Advanced AI Assistant</a> (the JARVIS section of this page)</li>
-            <li>Playwright: <a href="projects/playwright-weather-test.md">case study</a>, <a href="https://github.com/PlamenTanevGit/Claude_Sinoptik_Autogenerated" target="_blank" rel="noopener noreferrer">repository</a></li>
-            <li>Selenium Java Framework: <a href="projects/selenium-java-framework.md">case study</a>, <a href="https://github.com/PlamenTanevGit/LamdaTestRefact" target="_blank" rel="noopener noreferrer">repository</a></li>
-            <li><a href="projects/cypress-testing.md">Cypress Testing</a> case study</li>
-            <li><a href="projects/api-testing.md">API Testing</a> case study</li>
-            <li><a href="projects/regression-test-suite.md">Regression Suite</a> case study</li>
-            <li><a href="projects/ai-assisted-qa-workflows.md">AI QA Workflows</a> case study</li>
+            <li>Playwright: <a href="projects/playwright-weather-test.html">case study</a>, <a href="https://github.com/PlamenTanevGit/Claude_Sinoptik_Autogenerated" target="_blank" rel="noopener noreferrer">repository</a></li>
+            <li>Selenium Java Framework: <a href="projects/selenium-java-framework.html">case study</a>, <a href="https://github.com/PlamenTanevGit/LamdaTestRefact" target="_blank" rel="noopener noreferrer">repository</a></li>
+            <li><a href="projects/cypress-testing.html">Cypress Testing</a> case study</li>
+            <li><a href="projects/api-testing.html">API Testing</a> case study</li>
+            <li><a href="projects/regression-test-suite.html">Regression Suite</a> case study</li>
+            <li><a href="projects/ai-assisted-qa-workflows.html">AI QA Workflows</a> case study</li>
           </ul>
         </div>
       </noscript>
@@ -871,7 +908,7 @@
               <h3>Test Case</h3>
               <div class="ws-lines" aria-hidden="true"><i></i><i></i><i></i></div>
               <p>Full structure with preconditions, steps, expected result and derived negative cases.</p>
-              <a class="ws-open" href="samples/sample-test-case.md">Open &rarr;</a>
+              <a class="ws-open" href="samples/sample-test-case.html">Open &rarr;</a>
             </article>
           </section>
           <section class="ws-scene" style="--accent: #ffe286" data-sample="sample-bug-report.md">
@@ -880,7 +917,7 @@
               <h3>Bug Report</h3>
               <div class="ws-lines" aria-hidden="true"><i></i><i></i><i></i></div>
               <p>Duplicate-submit defect with environment, evidence and investigation hints.</p>
-              <a class="ws-open" href="samples/sample-bug-report.md">Open &rarr;</a>
+              <a class="ws-open" href="samples/sample-bug-report.html">Open &rarr;</a>
             </article>
           </section>
           <section class="ws-scene ws-scene--regression" style="--accent: #e176ff" data-sample="sample-regression-checklist.md">
@@ -889,7 +926,7 @@
               <h3>Regression Checklist</h3>
               <div class="ws-lines" aria-hidden="true"><i></i><i></i><i></i></div>
               <p>Smoke, critical flows, data, UI, API, cross-browser and negative checks.</p>
-              <a class="ws-open" href="samples/sample-regression-checklist.md">Open &rarr;</a>
+              <a class="ws-open" href="samples/sample-regression-checklist.html">Open &rarr;</a>
             </article>
           </section>
           <section class="ws-scene" style="--accent: #80bfff" data-sample="sample-api-test-plan.md">
@@ -898,7 +935,7 @@
               <h3>API Test Plan</h3>
               <div class="ws-lines" aria-hidden="true"><i></i><i></i><i></i></div>
               <p>Positive and negative cases, schema, data, performance smoke and security notes.</p>
-              <a class="ws-open" href="samples/sample-api-test-plan.md">Open &rarr;</a>
+              <a class="ws-open" href="samples/sample-api-test-plan.html">Open &rarr;</a>
             </article>
           </section>
           <section class="ws-scene" style="--accent: #66fff0" data-sample="sample-qa-risk-analysis.md">
@@ -907,7 +944,7 @@
               <h3>QA Risk Analysis</h3>
               <div class="ws-lines" aria-hidden="true"><i></i><i></i><i></i></div>
               <p>Feature-by-feature risk, impact, priority and coverage.</p>
-              <a class="ws-open" href="samples/sample-qa-risk-analysis.md">Open &rarr;</a>
+              <a class="ws-open" href="samples/sample-qa-risk-analysis.html">Open &rarr;</a>
             </article>
           </section>
         </div>
@@ -996,5 +1033,6 @@
   <script src="samples.js"></script>
   <script src="tools.js"></script>
   <script src="about.js"></script>
+  <script src="jarvis-cap.js"></script>
 </body>
 </html>

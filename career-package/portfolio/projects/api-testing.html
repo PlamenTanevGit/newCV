@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API Testing (REST and SOAP) | Plamen Tanev</title>
+  <meta name="description" content="Evidence level: training certificate and CV statements. No public API test repository exists yet. This page is an honest placeholder plus a worked plan. The two repositories named for web se">
+  <meta name="theme-color" content="#050911">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050911'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%23c8ff00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="Plamen Tanev, portfolio home">
+        <span class="brand-name">Plamen Tanev</span>
+        <span class="brand-role">Senior QA Engineer · Remote · EU / EMEA</span>
+      </a>
+      <a class="neon-button button-secondary doc-back" href="../index.html#projects">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="container doc">
+    <article class="doc-body">
+      <h1>API Testing (REST and SOAP)</h1>
+      <p><strong>Evidence level: training certificate and CV statements. No public API test repository exists yet.</strong> This page is an honest placeholder plus a worked plan. The two repositories named for web services (<code>wsTestUser</code>, <code>WS-HW</code>) contain only a README, so they are not presented as work.</p>
+      <h2>Project Overview</h2>
+      <p>API testing is part of my daily QA work according to my CV (REST and SOAP, Postman, SoapUI, REST Assured). What I can show publicly today:</p>
+      <ul>
+      <li>Training: <em>Web Services Testing (Foundation Level)</em>, Pragmatic, and a 2017 automation course whose programme included manual and automated web-service testing.</li>
+      <li>A fictional but realistic API test plan: <a href="../samples/sample-api-test-plan.html"><code>samples/sample-api-test-plan.md</code></a>.</li>
+      <li>HTTP-level integration tests in a small Node.js app (Mocha with node-fetch), run in GitHub Actions: <a href="https://github.com/PlamenTanevGit/01.Student-Registry-App" target="_blank" rel="noopener noreferrer">https://github.com/PlamenTanevGit/01.Student-Registry-App</a></li>
+      </ul>
+      <h2>Problem / Context</h2>
+      <p>UI tests are slow and fragile for checking business rules, data and permissions. API tests catch those problems earlier and run in seconds. They also give a stable way to prepare test data for UI and manual testing.</p>
+      <h2>Tools Used</h2>
+      <ul>
+      <li>Postman (collections, environments, test scripts), SoapUI (SOAP/WSDL)</li>
+      <li>REST Assured (Java), Mocha with node-fetch (JavaScript)</li>
+      <li>JSON, XML, SQL for data checks</li>
+      </ul>
+      <h2>QA Approach</h2>
+      <ol>
+      <li>Start from the contract (Swagger/OpenAPI or the API document) and the acceptance criteria.</li>
+      <li>Cover positive, negative, boundary, authorisation and schema cases per endpoint.</li>
+      <li>Assert status code, response body, headers and a simple response-time sanity check.</li>
+      <li>Verify persisted data through the UI or a SQL query.</li>
+      <li>Keep collections in version control and run them in CI where the team has it.</li>
+      </ol>
+      <h2>What Was Tested</h2>
+      <p>Public portfolio evidence is limited to the Node.js integration tests: page availability and content, form fields, adding a valid student and rejecting an invalid one (with an error message and an unchanged student count).</p>
+      <h2>Example Scenarios</h2>
+      <ol>
+      <li><code>POST</code> a valid resource, then <code>GET</code> it and compare the data.</li>
+      <li><code>POST</code> with a missing mandatory field and expect a <code>400</code> with a clear message.</li>
+      <li>Call an endpoint without a token, with an expired token and with the wrong role.</li>
+      <li>Send the same <code>POST</code> twice quickly and check for duplicates.</li>
+      </ol>
+      <h2>Example Test Cases</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Expected</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>API-01</td>
+      <td>Create with valid data</td>
+      <td><code>201</code>, response echoes data, <code>GET</code> returns the same data</td>
+      </tr>
+      <tr>
+      <td>API-02</td>
+      <td>Missing mandatory field</td>
+      <td><code>400</code>, field-level error message</td>
+      </tr>
+      <tr>
+      <td>API-03</td>
+      <td>No authentication token</td>
+      <td><code>401</code></td>
+      </tr>
+      <tr>
+      <td>API-04</td>
+      <td>Wrong role</td>
+      <td><code>403</code></td>
+      </tr>
+      <tr>
+      <td>API-05</td>
+      <td>Unknown ID</td>
+      <td><code>404</code></td>
+      </tr>
+      </tbody>
+      </table></div>
+      <p>Full plan: see the sample API test plan.</p>
+      <h2>Business Value</h2>
+      <p>No production results are claimed on this page. The sample plan shows how I structure API coverage so that regression is fast and risks (permissions, data integrity) are tested early.</p>
+      <h2>What I Would Improve Next</h2>
+      <ul>
+      <li>Publish a Postman collection against a public practice API, with test scripts, environments and a Newman run in GitHub Actions.</li>
+      <li>Add a small REST Assured project with schema validation.</li>
+      <li>Add a SoapUI project for a public SOAP service.</li>
+      <li>Write a short article on the API test pyramid from a QA point of view.</li>
+      </ul>
+      <h2>Repository / Demo Link</h2>
+      <ul>
+      <li>Related: <a href="https://github.com/PlamenTanevGit/01.Student-Registry-App" target="_blank" rel="noopener noreferrer">https://github.com/PlamenTanevGit/01.Student-Registry-App</a> (HTTP integration tests, practice project)</li>
+      <li>TODO: add a public Postman collection or API test repository.</li>
+      </ul>
+      <h2>Screenshots</h2>
+      <p>TODO: Add a Postman runner screenshot after publishing a collection.</p>
+      <h2>TODOs</h2>
+      <ul>
+      <li class="task"><input type="checkbox" disabled> Create and publish the Postman collection.</li>
+      <li class="task"><input type="checkbox" disabled> Confirm REST Assured and SoapUI claims on the CV with a concrete, non-confidential example.</li>
+      <li class="task"><input type="checkbox" disabled> Add the web-services certificate date.</li>
+      </ul>
+    </article>
+    <p class="doc-foot"><a class="neon-button button-secondary" href="../index.html#projects">&larr; Back to portfolio</a>
+      <a class="neon-button button-secondary" href="../PlamenTanevAiQA_Cv.pdf" download="PlamenTanevAiQA_Cv.pdf">Download CV</a></p>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2026 Plamen Tanev · Static page, no trackers.</div>
+  </footer>
+</body>
+</html>

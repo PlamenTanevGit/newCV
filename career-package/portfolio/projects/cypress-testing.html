@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cypress Testing | Plamen Tanev</title>
+  <meta name="description" content="Evidence level: learning notes only. No public Cypress repository exists yet. This page is an honest case-study placeholder. It does not claim a delivered project.">
+  <meta name="theme-color" content="#050911">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050911'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%23c8ff00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="Plamen Tanev, portfolio home">
+        <span class="brand-name">Plamen Tanev</span>
+        <span class="brand-role">Senior QA Engineer · Remote · EU / EMEA</span>
+      </a>
+      <a class="neon-button button-secondary doc-back" href="../index.html#projects">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="container doc">
+    <article class="doc-body">
+      <h1>Cypress Testing</h1>
+      <p><strong>Evidence level: learning notes only. No public Cypress repository exists yet.</strong> This page is an honest case-study placeholder. It does not claim a delivered project.</p>
+      <h2>Project Overview</h2>
+      <p>A study and practice track for Cypress with JavaScript. What exists today:</p>
+      <ul>
+      <li>Self-written notes in Google Drive (<code>Cypress.docx</code>) comparing Cypress with Selenium and covering setup, Mocha and Chai, locators, dropdowns, checkboxes, iframes and reporting tools.</li>
+      <li>A written evaluation of a Cypress course and a research guide on advanced Cypress (page objects versus custom commands, multi-tab limits, missing <code>cy.intercept</code> coverage).</li>
+      <li>The notes use public practice sites as examples.</li>
+      </ul>
+      <p>A planned portfolio project is described below.</p>
+      <h2>Problem / Context</h2>
+      <p>Teams choose between Selenium, Cypress and Playwright. I wanted a grounded view of where Cypress fits (fast feedback for front-end heavy apps, simple setup, runs in the browser's run loop) and where it does not (single-tab model, browser coverage, testing outside the app's origin).</p>
+      <h2>Tools Used</h2>
+      <ul>
+      <li>Cypress, JavaScript, Mocha, Chai</li>
+      <li>Reporting options studied: Mochawesome, Allure</li>
+      <li>Jenkins integration studied (notes only)</li>
+      </ul>
+      <h2>QA Approach</h2>
+      <ul>
+      <li>Select elements with stable attributes first; use XPath only through a plugin when needed.</li>
+      <li>Keep tests independent; set up state through requests instead of the UI where possible.</li>
+      <li>Compare page objects with custom commands and choose per project size.</li>
+      </ul>
+      <h2>What Was Tested</h2>
+      <p>Not yet delivered as a repository. Planned target: a public practice site that allows test traffic.</p>
+      <h2>Example Scenarios</h2>
+      <p><em>Planned for the practice project:</em>
+      1. Log in and log out with valid and invalid credentials.
+      2. Fill a form with dropdowns and checkboxes and verify validation messages.
+      3. Verify an iframe-based widget.
+      4. Intercept a network call and assert on the response.</p>
+      <h2>Example Test Cases</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Expected</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>CY-01 (planned)</td>
+      <td>Login with valid credentials</td>
+      <td>User reaches the account page</td>
+      </tr>
+      <tr>
+      <td>CY-02 (planned)</td>
+      <td>Login with invalid password</td>
+      <td>Error message shown; user stays on the login page</td>
+      </tr>
+      <tr>
+      <td>CY-03 (planned)</td>
+      <td>Form validation</td>
+      <td>Required fields flagged; successful submit shows confirmation</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>Business Value</h2>
+      <p>No business value is claimed for this page. The value is a clear understanding of trade-offs, which helps when advising a team on tool choice.</p>
+      <h2>What I Would Improve Next</h2>
+      <ul>
+      <li>Build the practice repository with 10–15 meaningful specs, a README and a GitHub Actions run.</li>
+      <li>Add network stubbing with <code>cy.intercept</code> and API-level login.</li>
+      <li>Publish the "Cypress vs Selenium vs Playwright" notes as a short, public write-up.</li>
+      </ul>
+      <h2>Repository / Demo Link</h2>
+      <p>TODO: no repository yet. Add the link when the practice project is published.</p>
+      <h2>Screenshots</h2>
+      <p>TODO: Add a Cypress runner screenshot after the practice project exists.</p>
+      <h2>TODOs</h2>
+      <ul>
+      <li class="task"><input type="checkbox" disabled> Create and publish the Cypress practice repository.</li>
+      <li class="task"><input type="checkbox" disabled> If you have real Cypress work from a job (not confidential), describe it here with permission.</li>
+      <li class="task"><input type="checkbox" disabled> Decide whether to keep Cypress as a headline skill on the CV or mark it "working knowledge".</li>
+      </ul>
+    </article>
+    <p class="doc-foot"><a class="neon-button button-secondary" href="../index.html#projects">&larr; Back to portfolio</a>
+      <a class="neon-button button-secondary" href="../PlamenTanevAiQA_Cv.pdf" download="PlamenTanevAiQA_Cv.pdf">Download CV</a></p>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2026 Plamen Tanev · Static page, no trackers.</div>
+  </footer>
+</body>
+</html>

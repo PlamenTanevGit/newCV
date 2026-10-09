@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample API Test Plan | Plamen Tanev</title>
+  <meta name="description" content="Illustrative sample. The endpoint below is fictional (/api/v1/work-requests) and exists only to demonstrate how I plan REST API testing. Adapt it to a real contract (Swagger/OpenAPI or the t">
+  <meta name="theme-color" content="#050911">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050911'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%23c8ff00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="Plamen Tanev, portfolio home">
+        <span class="brand-name">Plamen Tanev</span>
+        <span class="brand-role">Senior QA Engineer · Remote · EU / EMEA</span>
+      </a>
+      <a class="neon-button button-secondary doc-back" href="../index.html#samples">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="container doc">
+    <article class="doc-body">
+      <h1>Sample API Test Plan</h1>
+      <blockquote>
+      <p><strong>Illustrative sample.</strong> The endpoint below is fictional (<code>/api/v1/work-requests</code>) and exists only to demonstrate how I plan REST API testing. Adapt it to a real contract (Swagger/OpenAPI or the team's API documentation).</p>
+      </blockquote>
+      <h2>Scope</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Item</th>
+      <th>Detail</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td><strong>Endpoint</strong></td>
+      <td><code>/api/v1/work-requests</code> and <code>/api/v1/work-requests/{id}</code></td>
+      </tr>
+      <tr>
+      <td><strong>Methods</strong></td>
+      <td><code>POST</code> (create), <code>GET</code> (read, list), <code>PUT</code> (update), <code>DELETE</code> (cancel)</td>
+      </tr>
+      <tr>
+      <td><strong>Auth</strong></td>
+      <td>Bearer token (OAuth2 / JWT). Roles: Requester, Technician, Admin</td>
+      </tr>
+      <tr>
+      <td><strong>Tools</strong></td>
+      <td>Postman (collection + environments + test scripts), optional REST Assured for CI</td>
+      </tr>
+      <tr>
+      <td><strong>Environment</strong></td>
+      <td>TODO: test base URL; credentials come from environment variables, never committed</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>Request data (<code>POST</code> example)</h2>
+      <pre><code class="language-json">{
+        &quot;locationId&quot;: 12,
+        &quot;categoryId&quot;: 3,
+        &quot;description&quot;: &quot;Water leak under sink in room 2.14&quot;,
+        &quot;priority&quot;: &quot;HIGH&quot;
+      }
+      </code></pre>
+      <h2>Positive cases</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>ID</th>
+      <th>Case</th>
+      <th>Expected</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>P1</td>
+      <td>Create with all valid fields (Requester token)</td>
+      <td>201, body has <code>id</code>, <code>status = NEW</code>, echoed values</td>
+      </tr>
+      <tr>
+      <td>P2</td>
+      <td>Get the created request by <code>id</code></td>
+      <td>200, same data as created</td>
+      </tr>
+      <tr>
+      <td>P3</td>
+      <td>List with pagination (<code>page</code>, <code>size</code>) and filter by <code>status</code></td>
+      <td>200, correct page size, only matching items</td>
+      </tr>
+      <tr>
+      <td>P4</td>
+      <td>Update description (owner)</td>
+      <td>200, updated value persisted, <code>updatedAt</code> changed</td>
+      </tr>
+      <tr>
+      <td>P5</td>
+      <td>Cancel a request in an allowed status</td>
+      <td>200/204, status becomes <code>CANCELLED</code></td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>Negative cases</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>ID</th>
+      <th>Case</th>
+      <th>Expected</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>N1</td>
+      <td>Missing mandatory field (<code>description</code>)</td>
+      <td>400 with field-level error message</td>
+      </tr>
+      <tr>
+      <td>N2</td>
+      <td>Wrong data type (<code>locationId</code> as text)</td>
+      <td>400</td>
+      </tr>
+      <tr>
+      <td>N3</td>
+      <td>Invalid enum value (<code>priority = "URGENT!"</code>)</td>
+      <td>400</td>
+      </tr>
+      <tr>
+      <td>N4</td>
+      <td>Description over max length / max + 1</td>
+      <td>max accepted, max + 1 rejected (400)</td>
+      </tr>
+      <tr>
+      <td>N5</td>
+      <td>No token / expired token / malformed token</td>
+      <td>401</td>
+      </tr>
+      <tr>
+      <td>N6</td>
+      <td>Valid token, insufficient role (e.g. Requester deletes another user's request)</td>
+      <td>403</td>
+      </tr>
+      <tr>
+      <td>N7</td>
+      <td>Unknown <code>id</code></td>
+      <td>404</td>
+      </tr>
+      <tr>
+      <td>N8</td>
+      <td>Update after the request is closed</td>
+      <td>409 (or the documented rule)</td>
+      </tr>
+      <tr>
+      <td>N9</td>
+      <td>Same <code>POST</code> sent twice quickly</td>
+      <td>Documented behaviour: one record (idempotency) or a clear duplicate rule</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>Status codes to verify</h2>
+      <p><code>200</code>, <code>201</code>, <code>204</code>, <code>400</code>, <code>401</code>, <code>403</code>, <code>404</code>, <code>409</code>, <code>415</code> (wrong content type), <code>429</code> (if rate limiting exists), <code>5xx</code> must never appear for bad input.</p>
+      <h2>Schema validation</h2>
+      <ul>
+      <li>Validate every response against the JSON schema derived from the contract: required fields, types, enums, nullable fields.</li>
+      <li>Check that no unexpected fields appear (for example internal IDs, other users' data).</li>
+      <li>Postman: <code>tv4</code>/<code>ajv</code>-style schema assertion in the test script. REST Assured: JSON-schema validator matcher.</li>
+      </ul>
+      <h2>Data validation</h2>
+      <ul>
+      <li>Values returned equal values sent (including trimming, encoding and special characters).</li>
+      <li>Created data is visible through the UI and, where access is allowed, in the database (one row, correct foreign keys).</li>
+      <li>Timestamps use the documented format and time zone.</li>
+      <li>Pagination: <code>total</code>, <code>page</code>, <code>size</code> are consistent with the actual items.</li>
+      </ul>
+      <h2>Performance smoke check</h2>
+      <p>Not load testing. A basic sanity check only:
+      - Record response time of the main calls in the Postman runner.
+      - Flag anything above the agreed threshold (TODO: team-agreed value, for example 1 s for <code>GET</code>, 2 s for <code>POST</code>).
+      - Escalate suspected issues to the performance-testing owner.</p>
+      <h2>Security notes</h2>
+      <ul>
+      <li>Authorisation matrix: every role against every method (including access to other users' records, an IDOR check).</li>
+      <li>Token handling: expired, tampered and missing tokens.</li>
+      <li>Input handling: very long strings, special characters, script-like and SQL-like input must be rejected or safely handled.</li>
+      <li>Error responses must not leak stack traces or internal details.</li>
+      <li>Sensitive values stay out of URLs and logs.</li>
+      <li>A deeper security assessment belongs to a security specialist.</li>
+      </ul>
+      <h2>Execution and reporting</h2>
+      <ul>
+      <li>Postman collection runs on demand and, where the team has CI, in the pipeline (Newman, Jenkins or GitHub Actions).</li>
+      <li>Failures are reported as defects with the request, response, environment and a timestamp.</li>
+      <li>Keep the collection in version control next to the test documentation.</li>
+      </ul>
+    </article>
+    <p class="doc-foot"><a class="neon-button button-secondary" href="../index.html#samples">&larr; Back to portfolio</a>
+      <a class="neon-button button-secondary" href="../PlamenTanevAiQA_Cv.pdf" download="PlamenTanevAiQA_Cv.pdf">Download CV</a></p>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2026 Plamen Tanev · Static page, no trackers.</div>
+  </footer>
+</body>
+</html>

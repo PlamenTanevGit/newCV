@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample Bug Report | Plamen Tanev</title>
+  <meta name="description" content="Illustrative sample. This is a fictional defect written to show how I report bugs. It does not describe a real defect in any employer&#x27;s product.">
+  <meta name="theme-color" content="#050911">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050911'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%23c8ff00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="Plamen Tanev, portfolio home">
+        <span class="brand-name">Plamen Tanev</span>
+        <span class="brand-role">Senior QA Engineer · Remote · EU / EMEA</span>
+      </a>
+      <a class="neon-button button-secondary doc-back" href="../index.html#samples">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="container doc">
+    <article class="doc-body">
+      <h1>Sample Bug Report</h1>
+      <blockquote>
+      <p><strong>Illustrative sample.</strong> This is a fictional defect written to show how I report bugs. It does not describe a real defect in any employer's product.</p>
+      </blockquote>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Field</th>
+      <th>Value</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td><strong>Bug ID</strong></td>
+      <td>BUG-0000 (sample)</td>
+      </tr>
+      <tr>
+      <td><strong>Title</strong></td>
+      <td>Work request is created twice when <strong>Submit</strong> is double-clicked on a slow connection</td>
+      </tr>
+      <tr>
+      <td><strong>Environment</strong></td>
+      <td>Test environment (TODO: name). Build 1.0.0-sample. Windows 11, Chrome (latest). Network throttled to "Slow 3G" via browser dev tools.</td>
+      </tr>
+      <tr>
+      <td><strong>Severity</strong></td>
+      <td>Major. Data integrity issue, no data loss, workaround exists.</td>
+      </tr>
+      <tr>
+      <td><strong>Priority</strong></td>
+      <td>High. Duplicate records create duplicate tasks for the support team.</td>
+      </tr>
+      <tr>
+      <td><strong>Reproducibility</strong></td>
+      <td>5 out of 5 attempts with throttling enabled. Not reproduced with normal network speed in 5 attempts.</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>Preconditions</h2>
+      <ol>
+      <li>User with the <em>Requester</em> role is logged in.</li>
+      <li>Browser dev tools are open with network throttling set to "Slow 3G".</li>
+      <li>The "New Work Request" form is filled in with valid data.</li>
+      </ol>
+      <h2>Steps to Reproduce</h2>
+      <ol>
+      <li>Click <strong>Submit</strong> once.</li>
+      <li>Click <strong>Submit</strong> a second time within about one second, before the page responds.</li>
+      <li>Wait for the redirect and open "My Requests".</li>
+      </ol>
+      <h2>Actual Result</h2>
+      <p>Two requests with identical data and different request numbers (for example WR-1001 and WR-1002) are listed. Each one has a "request created" entry in its history.</p>
+      <h2>Expected Result</h2>
+      <p>Exactly one request is created. The <strong>Submit</strong> button is disabled (or the request is made idempotent) after the first click, and the user sees a single confirmation.</p>
+      <h2>Attachments</h2>
+      <ul>
+      <li><code>double-submit.mp4</code>: screen recording (TODO: attach in a real report)</li>
+      <li><code>network-log.har</code>: HAR export showing two <code>POST</code> calls (TODO: attach in a real report)</li>
+      </ul>
+      <h2>Logs</h2>
+      <pre><code class="language-text">POST /api/v1/work-requests  -&gt; 201 Created  (first click)
+      POST /api/v1/work-requests  -&gt; 201 Created  (second click)
+      </code></pre>
+      <p><em>The log above is illustrative of what I would capture, not real output.</em></p>
+      <h2>Notes</h2>
+      <ul>
+      <li>Related risks worth checking: browser back button after submit, pressing Enter twice in the form, page refresh immediately after submit.</li>
+      <li>No console errors were observed in this scenario.</li>
+      </ul>
+      <h2>Suggested Investigation Area</h2>
+      <ul>
+      <li>Front end: disabling the submit control on first click, and handling in-flight state.</li>
+      <li>Back end: idempotency key or duplicate-detection window on the create endpoint.</li>
+      <li>Add a regression test at API level (two identical concurrent <code>POST</code> calls) and at UI level (double-click).</li>
+      </ul>
+    </article>
+    <p class="doc-foot"><a class="neon-button button-secondary" href="../index.html#samples">&larr; Back to portfolio</a>
+      <a class="neon-button button-secondary" href="../PlamenTanevAiQA_Cv.pdf" download="PlamenTanevAiQA_Cv.pdf">Download CV</a></p>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2026 Plamen Tanev · Static page, no trackers.</div>
+  </footer>
+</body>
+</html>

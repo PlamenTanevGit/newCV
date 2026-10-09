@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample Test Case | Plamen Tanev</title>
+  <meta name="description" content="Illustrative sample. This is a fictional example written to show how I structure test cases. It is not taken from any employer&#x27;s product or system.">
+  <meta name="theme-color" content="#050911">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050911'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%23c8ff00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="Plamen Tanev, portfolio home">
+        <span class="brand-name">Plamen Tanev</span>
+        <span class="brand-role">Senior QA Engineer · Remote · EU / EMEA</span>
+      </a>
+      <a class="neon-button button-secondary doc-back" href="../index.html#samples">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="container doc">
+    <article class="doc-body">
+      <h1>Sample Test Case</h1>
+      <blockquote>
+      <p><strong>Illustrative sample.</strong> This is a fictional example written to show how I structure test cases. It is not taken from any employer's product or system.</p>
+      </blockquote>
+      <p><strong>Feature under test:</strong> Submitting a work request in a generic facility-management style web application.</p>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Field</th>
+      <th>Value</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td><strong>Test Case ID</strong></td>
+      <td>TC-WR-014</td>
+      </tr>
+      <tr>
+      <td><strong>Title</strong></td>
+      <td>Submit a work request with all mandatory fields and a valid attachment</td>
+      </tr>
+      <tr>
+      <td><strong>Preconditions</strong></td>
+      <td>1. User account with the <em>Requester</em> role exists and is active.<br>2. User is logged in and on the "New Work Request" page.<br>3. At least one active location and one active category exist in the reference data.<br>4. A test file <code>leak_photo.jpg</code> (800 KB) is available locally.</td>
+      </tr>
+      <tr>
+      <td><strong>Priority</strong></td>
+      <td>High</td>
+      </tr>
+      <tr>
+      <td><strong>Type</strong></td>
+      <td>Functional, positive, end-to-end (UI + persisted data)</td>
+      </tr>
+      <tr>
+      <td><strong>Linked requirement</strong></td>
+      <td>TODO: link to the user story / acceptance criteria (e.g. Jira key) when used in a real project</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>Steps</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>#</th>
+      <th>Action</th>
+      <th>Test data</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>1</td>
+      <td>Select a location from the <em>Location</em> dropdown.</td>
+      <td>Location: "Building A / Floor 2"</td>
+      </tr>
+      <tr>
+      <td>2</td>
+      <td>Select a category from the <em>Category</em> dropdown.</td>
+      <td>Category: "Plumbing"</td>
+      </tr>
+      <tr>
+      <td>3</td>
+      <td>Enter a short description.</td>
+      <td>"Water leak under sink in room 2.14"</td>
+      </tr>
+      <tr>
+      <td>4</td>
+      <td>Select a priority.</td>
+      <td>Priority: "High"</td>
+      </tr>
+      <tr>
+      <td>5</td>
+      <td>Attach a file using the <em>Attach</em> control.</td>
+      <td><code>leak_photo.jpg</code></td>
+      </tr>
+      <tr>
+      <td>6</td>
+      <td>Click <strong>Submit</strong>.</td>
+      <td>n/a</td>
+      </tr>
+      <tr>
+      <td>7</td>
+      <td>Open the request from the "My Requests" list.</td>
+      <td>n/a</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>Expected Result</h2>
+      <ol>
+      <li>After step 5 the attachment name and size are shown and no validation error appears.</li>
+      <li>After step 6 a success message is displayed and the user is redirected to the request detail page.</li>
+      <li>The request receives a unique, system-generated number and the initial status "New".</li>
+      <li>In step 7 all entered values (location, category, description, priority) and the attachment are shown exactly as submitted.</li>
+      <li>A request-created entry appears in the request's activity history, with the correct user and timestamp.</li>
+      </ol>
+      <h2>Actual Result</h2>
+      <p><em>Not executed. Fill in during execution.</em></p>
+      <h2>Status</h2>
+      <p>Not Run (options: Not Run / Pass / Fail / Blocked)</p>
+      <h2>Notes</h2>
+      <ul>
+      <li><strong>Negative / boundary variants to derive from this case:</strong> empty mandatory fields, description at max length and max length + 1, unsupported file type, file above the size limit, double-click on <strong>Submit</strong> (duplicate request check), session timeout during submit.</li>
+      <li><strong>Data check:</strong> where database access is available, confirm one request record and one attachment record were created (no duplicates).</li>
+      <li><strong>Cross-browser:</strong> run on the supported browser matrix as part of regression.</li>
+      <li><strong>Automation candidate:</strong> Yes. Stable end-to-end flow, high business value, good fit for the regression suite.</li>
+      </ul>
+    </article>
+    <p class="doc-foot"><a class="neon-button button-secondary" href="../index.html#samples">&larr; Back to portfolio</a>
+      <a class="neon-button button-secondary" href="../PlamenTanevAiQA_Cv.pdf" download="PlamenTanevAiQA_Cv.pdf">Download CV</a></p>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2026 Plamen Tanev · Static page, no trackers.</div>
+  </footer>
+</body>
+</html>

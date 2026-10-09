@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Selenium Java Test Framework (Page Object Model) | Plamen Tanev</title>
+  <meta name="description" content="Evidence level: real public repository. Findings come from reading the repositories on 2026-10-01.">
+  <meta name="theme-color" content="#050911">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050911'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%23c8ff00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="Plamen Tanev, portfolio home">
+        <span class="brand-name">Plamen Tanev</span>
+        <span class="brand-role">Senior QA Engineer · Remote · EU / EMEA</span>
+      </a>
+      <a class="neon-button button-secondary doc-back" href="../index.html#projects">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="container doc">
+    <article class="doc-body">
+      <h1>Selenium Java Test Framework (Page Object Model)</h1>
+      <p><strong>Evidence level: real public repository.</strong> Findings come from reading the repositories on 2026-10-01.</p>
+      <h2>Project Overview</h2>
+      <p>A Java, Selenium WebDriver and TestNG framework using the Page Object Model, built against a public demo e-commerce site (<code>ecommerce-playground.lambdatest.io</code>). The refactored version lives in <code>LamdaTestRefact</code>. Earlier, broader snapshots are in <code>LambdaTest</code> and <code>ShoppingDemo</code>.</p>
+      <h2>Problem / Context</h2>
+      <p>Practice and refactoring project: take a growing set of shopping tests and give them a clean structure (pages, utilities, listeners, data providers, configuration) that is easy to extend and run in parallel. The tests run on local Chrome or Firefox through WebDriverManager. They do not use the LambdaTest cloud grid, despite the repo name.</p>
+      <h2>Tools Used</h2>
+      <ul>
+      <li>Java, Selenium WebDriver 3.141.59, TestNG 7.1.0, Maven (profiles <code>stage</code> and <code>test</code> with filtered config files)</li>
+      <li>WebDriverManager, JavaFaker, OpenCSV, Apache POI (Excel)</li>
+      <li>ExtentReports and ReportNG reporting, Log4j</li>
+      <li>TestNG listeners, <code>SoftAssert</code>, <code>ThreadLocal&lt;WebDriver&gt;</code></li>
+      </ul>
+      <h2>QA Approach</h2>
+      <ul>
+      <li><strong>Layered structure:</strong> <code>Pages</code> (13 page objects such as home, login, search results, cart, checkout, order confirmation, account), <code>Utils</code> (base test, driver factory, helpers, data generators, CSV reader), <code>Listeners</code> (reporting and WebDriver event logging), <code>DataProviders</code>.</li>
+      <li><strong>Isolation for parallel runs:</strong> a thread-local driver and <code>parallel="methods"</code> with two threads in <code>testng.xml</code>.</li>
+      <li><strong>Data-driven tests:</strong> TestNG <code>@DataProvider</code> and CSV/Excel sources, generated test data with Faker.</li>
+      <li><strong>Configuration per environment:</strong> <code>config.&lt;env&gt;.properties</code> selected through Maven profiles.</li>
+      <li><strong>Evidence:</strong> HTML and Extent reports, event-firing driver logging.</li>
+      </ul>
+      <h2>What Was Tested</h2>
+      <ul>
+      <li>Search and product selection, adding and removing items from the cart (single and multiple).</li>
+      <li>Price and total calculations: unit price, eco tax, VAT and cart total assertions.</li>
+      <li>Empty-cart message after removing items.</li>
+      <li>In the earlier snapshots: guest and registered purchase flows with and without VAT, direct checkout, login, continue-shopping.</li>
+      </ul>
+      <h2>Example Scenarios</h2>
+      <ol>
+      <li>Search for a product, add three items, verify unit prices, tax and total, then remove everything and confirm the "Your shopping cart is empty!" message.</li>
+      <li>Purchase as a guest with VAT versus without VAT and compare totals.</li>
+      <li>Run the same home-page checks with several data rows from a DataProvider.</li>
+      </ol>
+      <h2>Example Test Cases</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Steps (summary)</th>
+      <th>Expected</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>SEL-01</td>
+      <td>Add and remove multiple items</td>
+      <td>Search → add 3 items → open cart → remove all</td>
+      <td>Totals correct at each step; empty-cart message at the end</td>
+      </tr>
+      <tr>
+      <td>SEL-02</td>
+      <td>Price calculation</td>
+      <td>Add item → open cart</td>
+      <td>Unit price × quantity + eco tax + VAT equals the displayed total</td>
+      </tr>
+      <tr>
+      <td>SEL-03</td>
+      <td>Guest purchase with VAT</td>
+      <td>Add item → guest checkout → confirm order</td>
+      <td>Order success page; totals include VAT</td>
+      </tr>
+      <tr>
+      <td>SEL-04</td>
+      <td>Data-driven home page check</td>
+      <td>Run with CSV rows</td>
+      <td>Each data row passes the same assertions</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <p><em>IDs are portfolio labels. The scenarios reflect the test classes in the repositories (add/remove items, calculations, purchase flows).</em></p>
+      <h2>Business Value</h2>
+      <p>This is a practice framework on a public demo site, so no production results are claimed. It demonstrates the structure I use for maintainable UI automation: separation of page logic and tests, per-environment configuration, parallel-safe drivers, data-driven tests and readable reports.</p>
+      <h2>What I Would Improve Next</h2>
+      <ul>
+      <li>Upgrade to Selenium 4 and a current TestNG, and use explicit waits through a small wait helper.</li>
+      <li>Add a README and a CI workflow (GitHub Actions) with a scheduled run and report upload.</li>
+      <li>Re-enable and finish the commented-out tests left from the refactor.</li>
+      <li>Move test data out of code where possible and tag tests (smoke, regression).</li>
+      <li>Add API-level setup for test data, so UI tests focus on the user flow.</li>
+      <li>Fix the odd class names (<code>testOercent</code>) and remove duplicated Extent report libraries.</li>
+      </ul>
+      <h2>Repository / Demo Link</h2>
+      <ul>
+      <li>Refactored: <a href="https://github.com/PlamenTanevGit/LamdaTestRefact" target="_blank" rel="noopener noreferrer">https://github.com/PlamenTanevGit/LamdaTestRefact</a></li>
+      <li>Earlier version: <a href="https://github.com/PlamenTanevGit/LambdaTest" target="_blank" rel="noopener noreferrer">https://github.com/PlamenTanevGit/LambdaTest</a></li>
+      <li>Demo: none (target is the public demo site)</li>
+      </ul>
+      <h2>Screenshots</h2>
+      <p>TODO: Add a screenshot of the project structure and one Extent report. See <code>assets/placeholders/project-screenshot-placeholders.md</code>.</p>
+      <h2>TODOs</h2>
+      <ul>
+      <li class="task"><input type="checkbox" disabled> Add README and CI.</li>
+      <li class="task"><input type="checkbox" disabled> Add report screenshot.</li>
+      <li class="task"><input type="checkbox" disabled> Confirm that the work is entirely your own and not from a course, and describe it accordingly.</li>
+      </ul>
+    </article>
+    <p class="doc-foot"><a class="neon-button button-secondary" href="../index.html#projects">&larr; Back to portfolio</a>
+      <a class="neon-button button-secondary" href="../PlamenTanevAiQA_Cv.pdf" download="PlamenTanevAiQA_Cv.pdf">Download CV</a></p>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2026 Plamen Tanev · Static page, no trackers.</div>
+  </footer>
+</body>
+</html>

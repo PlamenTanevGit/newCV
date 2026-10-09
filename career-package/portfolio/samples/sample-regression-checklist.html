@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample Regression Checklist | Plamen Tanev</title>
+  <meta name="description" content="Illustrative sample. Generic web application example. The structure is what matters: smoke first, then critical flows, then deeper checks. Adapt the rows to the real product and release scop">
+  <meta name="theme-color" content="#050911">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050911'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%23c8ff00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html" aria-label="Plamen Tanev, portfolio home">
+        <span class="brand-name">Plamen Tanev</span>
+        <span class="brand-role">Senior QA Engineer · Remote · EU / EMEA</span>
+      </a>
+      <a class="neon-button button-secondary doc-back" href="../index.html#samples">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="container doc">
+    <article class="doc-body">
+      <h1>Sample Regression Checklist</h1>
+      <blockquote>
+      <p><strong>Illustrative sample.</strong> Generic web application example. The structure is what matters: smoke first, then critical flows, then deeper checks. Adapt the rows to the real product and release scope.</p>
+      </blockquote>
+      <p><strong>Release scope:</strong> TODO (version, changed areas, risk notes from the change list)
+      <strong>Environment / build:</strong> TODO
+      <strong>Browsers in scope:</strong> Chrome (latest), Firefox (latest), Edge (latest), Safari (latest, if supported)</p>
+      <h2>1. Smoke (run first, stop and escalate if any item fails)</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Area</th>
+      <th>Check</th>
+      <th>Result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Smoke</td>
+      <td>Application loads and the login page is reachable</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Smoke</td>
+      <td>Valid user can log in and reach the home page</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Smoke</td>
+      <td>Main navigation items open without errors</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Smoke</td>
+      <td>Health or status endpoint returns success (if available)</td>
+      <td>☐</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>2. Critical flows</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Critical flow</th>
+      <th>Key checks</th>
+      <th>Result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Login / logout / session</td>
+      <td>Valid login, invalid login message, logout, session expiry</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Create a record (e.g. work request)</td>
+      <td>Mandatory fields, successful save, record visible in list and detail</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Edit and status change</td>
+      <td>Edit saved, allowed status transitions only, history updated</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Search and filter</td>
+      <td>Results match filters, empty-state message, sorting and paging</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Roles and permissions</td>
+      <td>Each role sees only permitted menus and actions</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Notifications / email</td>
+      <td>Triggered on the expected events, correct recipients and content</td>
+      <td>☐</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>3. Data validation</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Check</th>
+      <th>Result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Saved values equal entered values (UI, API response, database where accessible)</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>No duplicate records after a save or retry</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Boundary values (min, max, max + 1) on key fields</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Date, time zone and number formatting</td>
+      <td>☐</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>4. UI validation</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Check</th>
+      <th>Result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Labels, validation messages and error texts are correct and readable</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Layout intact at common resolutions (desktop and a narrow window)</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Keyboard navigation and visible focus on forms (accessibility basics)</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>No console errors on the main flows</td>
+      <td>☐</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>5. API validation</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Check</th>
+      <th>Result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Key endpoints return the expected status codes (200/201/400/401/403/404)</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Response schema and mandatory fields unchanged</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Auth is enforced (no token, expired token, wrong role)</td>
+      <td>☐</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>6. Cross-browser check</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Browser</th>
+      <th>Smoke</th>
+      <th>Critical flows</th>
+      <th>Notes</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Chrome</td>
+      <td>☐</td>
+      <td>☐</td>
+      <td></td>
+      </tr>
+      <tr>
+      <td>Firefox</td>
+      <td>☐</td>
+      <td>☐</td>
+      <td></td>
+      </tr>
+      <tr>
+      <td>Edge</td>
+      <td>☐</td>
+      <td>☐</td>
+      <td></td>
+      </tr>
+      <tr>
+      <td>Safari</td>
+      <td>☐</td>
+      <td>☐</td>
+      <td></td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>7. Negative scenarios</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Scenario</th>
+      <th>Result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Submit with empty mandatory fields</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Invalid input (special characters, very long text, script-like input)</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Double-click / double-submit</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Unauthorised direct URL access</td>
+      <td>☐</td>
+      </tr>
+      <tr>
+      <td>Network interruption during save</td>
+      <td>☐</td>
+      </tr>
+      </tbody>
+      </table></div>
+      <h2>8. Risk notes</h2>
+      <ul>
+      <li>Areas touched by this release get extra exploratory time.</li>
+      <li>Known open defects that affect regression scope: TODO.</li>
+      <li>Items skipped and why (time, data, environment): TODO.</li>
+      <li>Candidates to move into automation after this run: TODO.</li>
+      </ul>
+      <h2>Sign-off</h2>
+      <div class="table-wrap"><table>
+      <thead>
+      <tr>
+      <th>Field</th>
+      <th>Value</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Executed by</td>
+      <td>TODO</td>
+      </tr>
+      <tr>
+      <td>Date</td>
+      <td>TODO</td>
+      </tr>
+      <tr>
+      <td>Result</td>
+      <td>Go / Go with known issues / No-go</td>
+      </tr>
+      <tr>
+      <td>Open defects</td>
+      <td>TODO</td>
+      </tr>
+      </tbody>
+      </table></div>
+    </article>
+    <p class="doc-foot"><a class="neon-button button-secondary" href="../index.html#samples">&larr; Back to portfolio</a>
+      <a class="neon-button button-secondary" href="../PlamenTanevAiQA_Cv.pdf" download="PlamenTanevAiQA_Cv.pdf">Download CV</a></p>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2026 Plamen Tanev · Static page, no trackers.</div>
+  </footer>
+</body>
+</html>
